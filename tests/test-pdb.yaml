@@ -1,0 +1,15 @@
+suite: PodDisruptionBudget
+templates:
+  - templates/*.y*ml
+tests:
+  - it: Deployment should have a proper configuration of `PodDisruptionBudget`
+    documentSelector:
+      path: kind
+      value: PodDisruptionBudget
+      skipEmptyTemplates: true
+    asserts:
+      - exists:
+          path: spec.minAvailable
+      - greaterOrEqual:
+          path: spec.minAvailable
+          value: 1
